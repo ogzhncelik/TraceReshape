@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/trace_reshape" >
+        <file>icon.png</file>
+    </qresource>
+</RCC>
