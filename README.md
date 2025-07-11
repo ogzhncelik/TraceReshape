@@ -26,7 +26,7 @@ Simply press and hold the left mouse button, trace over the existing shape, and 
 1. Activate the plugin from QGIS.
 2. Select the feature you want to reshape.
 3. Click and drag on the canvas to draw a new trace path.
-4. Release to apply the reshaping operation.
+4. Use right-click to finish and apply the reshaping operation.
 
 ---
 ## 📄 License
