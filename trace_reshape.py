@@ -33,16 +33,9 @@ from qgis.core import (
 )
 
 from qgis.gui import QgsMapTool, QgsRubberBand
-from qgis.utils import iface
-
-# Initialize Qt resources from file resources.py
-from .resources import *
-# Import the code for the dialog
-from .trace_reshape_dialog import TraceReshapeDialog
 from qgis.core import QgsFeatureRequest, QgsGeometry, QgsWkbTypes, QgsLineString, QgsRectangle, QgsPointXY
 import os.path
 import traceback
-#import resources
 from PyQt5.QtCore import Qt
 
 
@@ -171,8 +164,6 @@ class TraceReshape:
         return action
 
     def initGui(self):
-        """Create the menu entries and toolbar icons inside the QGIS GUI."""
-
         icon_path = ':/plugins/trace_reshape/icon.png'
         self.add_action(
             icon_path,
@@ -185,7 +176,6 @@ class TraceReshape:
 
 
     def unload(self):
-        """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
             self.iface.removePluginMenu(
                 self.tr(u'&Trace Reshape'),
@@ -275,8 +265,6 @@ class TraceReshapeTool(QgsMapTool):
                 self.rubber_band.show()
 
     def apply_reshape(self):
-
-
         if not self.points or len(self.points) < 2:
             self.rubber_band.reset(QgsWkbTypes.LineGeometry)
             self.iface.messageBar().pushMessage("Make a valid drawing",level=Qgis.Warning, duration=2)
@@ -315,9 +303,7 @@ class TraceReshapeTool(QgsMapTool):
         else:
             transformed_polyline = polyline
 
-
         features = list(layer.getFeatures(QgsFeatureRequest(rect)))
-
 
         no_match = True
         for f in features:
@@ -343,7 +329,7 @@ class TraceReshapeTool(QgsMapTool):
             return
 
         original_geom = feature.geometry()
-        line_points = [QgsPointXY(p) for p in self.points]
+        #line_points = [QgsPointXY(p) for p in self.points]
         if original_geom.isMultipart():
             if original_geom.type() == QgsWkbTypes.PolygonGeometry:
                 part = original_geom.asMultiPolygon()[0]
@@ -352,15 +338,11 @@ class TraceReshapeTool(QgsMapTool):
                 part = original_geom.asMultiPolyline()[0]
                 original_geom = QgsGeometry.fromPolylineXY(part)
         try:
-            #new_line = QgsLineString(line_points)
-            #line_geom = QgsGeometry.fromPolylineXY(line_points)
-
             canvas_crs = self.canvas.mapSettings().destinationCrs()
             layer_crs = layer.crs()
 
             points = self.points
 
-            # CRS dönüşümü gerekiyorsa noktaları çevir
             if canvas_crs != layer_crs:
                 transform = QgsCoordinateTransform(canvas_crs, layer_crs, QgsProject.instance())
                 transformed_points = [transform.transform(p) for p in points]
@@ -369,11 +351,6 @@ class TraceReshapeTool(QgsMapTool):
 
             line_geom = QgsGeometry.fromPolylineXY(transformed_points)
 
-            #line_string = QgsLineString(transformed_points)
-
-            # Tırtıkları azaltmak için çizgiyi sadeleştir
-            #tolerance = self.canvas.mapUnitsPerPixel() * 1.5
-            #line_geom = line_geom.simplify(tolerance)
             line_geom = line_geom.smooth(2, 0.1, False)
 
             result = original_geom.reshapeGeometry(line_geom.constGet())
