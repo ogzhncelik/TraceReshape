@@ -10,7 +10,7 @@ version=0.1
 author=Oğuzhan Çelik
 email=ogzhn.celik@gmail.com
 
-about=Trace Reshape is a QGIS plugin that enables interactive reshaping of existing polygon or line geometries.Simply press and hold the left mouse button, draw over the shape with a trace line, and then right-click to apply the update.It supports undo/redo actions and is ideal for editing complex borders quickly. 
+about=Trace Reshape is a QGIS plugin that enables interactive reshaping of existing polygon or line geometries. Simply press and hold the left mouse button, draw over the shape with a trace line, and then right-click to apply the update. It supports undo/redo actions and is ideal for editing complex borders quickly.
 tracker=https://github.com/ogzhncelik/TraceReshape/issues
 repository=https://github.com/ogzhncelik/TraceReshape
 # End of mandatory metadata
@@ -24,7 +24,7 @@ hasProcessingProvider=no
 # Tags are comma separated with spaces allowed
 tags=python, polygon, reshape, digitizing
 
-homepage=http://localhost/plugin-home
+homepage=https://github.com/ogzhncelik/TraceReshape
 category=Plugins
 icon=icon.png
 # experimental flag
@@ -39,7 +39,7 @@ deprecated=False
 # plugin_dependencies=
 
 Category of the plugin: Raster, Vector, Database or Web
-# category=
+# category=Plugins
 
 # If the plugin can run on QGIS Server.
 server=False
