@@ -30,13 +30,16 @@ Simply press and hold the left mouse button, trace over the existing shape, and 
 
 ---
 ## 📄 License
+
 This project is licensed under the GNU General Public License v3.0.
 See the LICENSE file for more details.
----
 
-👤 Author
+---
+## 👤 Author
+
 Developed by @ogzhncelik
 All contributions are welcome through issues or pull requests.
+
 ---
 ## 📁 Project Structure
 
